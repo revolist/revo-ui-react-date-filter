@@ -5,7 +5,8 @@ import {
 import type { CalendarDateRange } from '@revolist/ui/calendar/types';
 
 export type DateRange = CalendarDateRange;
-export type Order = { id: string; bookedOn: string; customer: string; cents: number };
+export type InvoiceStatus = 'awaiting' | 'paid';
+export type Order = { id: string; bookedOn: string; customer: string; cents: number; status: InvoiceStatus };
 
 // A frozen reporting date keeps the tutorial reproducible next month or year.
 export const REFERENCE_DATE = '2026-11-16';
@@ -39,16 +40,16 @@ export function validateRange(range: DateRange): string {
 
 // Fixture values are fictional; cents avoid floating-point addition for totals.
 export const ORDERS: readonly Order[] = [
-  { id: 'INV-101', bookedOn: '2026-10-01', customer: 'North Studio', cents: 89000 },
-  { id: 'INV-102', bookedOn: '2026-10-15', customer: 'Atlas Works', cents: 25000 },
-  { id: 'INV-103', bookedOn: '2026-10-31', customer: 'Fern Systems', cents: 120000 },
-  { id: 'INV-104', bookedOn: '2026-11-01', customer: 'North Studio', cents: 45000 },
-  { id: 'INV-105', bookedOn: '2026-11-03', customer: 'Orbit Design', cents: 67000 },
-  { id: 'INV-106', bookedOn: '2026-11-09', customer: 'Atlas Works', cents: 21000 },
-  { id: 'INV-107', bookedOn: '2026-11-10', customer: 'North Studio', cents: 125000 },
-  { id: 'INV-108', bookedOn: '2026-11-12', customer: 'Fern Systems', cents: 33000 },
-  { id: 'INV-109', bookedOn: '2026-11-14', customer: 'Orbit Design', cents: 190000 },
-  { id: 'INV-110', bookedOn: '2026-11-16', customer: 'Atlas Works', cents: 52000 },
+  { id: 'INV-101', bookedOn: '2026-10-01', customer: 'North Studio', cents: 89000, status: 'awaiting' },
+  { id: 'INV-102', bookedOn: '2026-10-15', customer: 'Atlas Works', cents: 25000, status: 'awaiting' },
+  { id: 'INV-103', bookedOn: '2026-10-31', customer: 'Fern Systems', cents: 120000, status: 'awaiting' },
+  { id: 'INV-104', bookedOn: '2026-11-01', customer: 'North Studio', cents: 45000, status: 'awaiting' },
+  { id: 'INV-105', bookedOn: '2026-11-03', customer: 'Orbit Design', cents: 67000, status: 'awaiting' },
+  { id: 'INV-106', bookedOn: '2026-11-09', customer: 'Atlas Works', cents: 21000, status: 'awaiting' },
+  { id: 'INV-107', bookedOn: '2026-11-10', customer: 'North Studio', cents: 125000, status: 'awaiting' },
+  { id: 'INV-108', bookedOn: '2026-11-12', customer: 'Fern Systems', cents: 33000, status: 'awaiting' },
+  { id: 'INV-109', bookedOn: '2026-11-14', customer: 'Orbit Design', cents: 190000, status: 'awaiting' },
+  { id: 'INV-110', bookedOn: '2026-11-16', customer: 'Atlas Works', cents: 52000, status: 'awaiting' },
 ];
 
 export function filterOrders(orders: readonly Order[], range: DateRange): Order[] {

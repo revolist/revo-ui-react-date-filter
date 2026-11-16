@@ -19,6 +19,12 @@ Open the local URL printed by Vite.
 
 The default range is November 10–16: four invoices totaling $4,000.00. **This month** changes the draft to November 1–16. **Apply filters** updates the report to seven invoices totaling $5,330.00. Rejected ranges retain the previous report; **Reset** restores both draft and applied dates. November 5–6 produces a valid empty result.
 
+## Invoice actions
+
+Check individual invoices or use the header checkbox to select all visible invoices. Use **Mark paid** or **Awaiting payment** to change the selected rows. Statuses display as compact pills. Actions do not change booked revenue. Applying or resetting dates clears selection while retaining status edits; refreshing the page restores the fictional fixtures.
+
+Pass `locale="fr"` to `App` to translate the invoice actions and status labels. The default is English.
+
 ## Validate
 
 ```bash

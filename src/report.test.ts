@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { invoiceMessages } from './invoice-messages.ts';
 import { addDays, isValidIsoDate } from '@revolist/ui/dates';
 import {
   ORDERS, filterOrders, formatDate, inclusiveDays,
@@ -55,4 +56,11 @@ test('single-day and empty ranges are valid report results', () => {
 test('report date labels use the shared formatter and host locale', () => {
   assert.equal(formatDate('2026-11-16'), '16 Nov 2026');
   assert.equal(formatDate('2026-11-16', 'fr-FR'), '16 nov. 2026');
+});
+
+test('invoice action labels support a host-provided French locale', () => {
+  assert.equal(invoiceMessages.fr.statuses.paid, 'Payée');
+  assert.equal(invoiceMessages.fr.select('INV-107'), 'Sélectionner INV-107');
+  assert.equal(invoiceMessages.fr.selected(2), '2 sélectionnée(s)');
+  assert.equal(invoiceMessages.fr.saved(2, invoiceMessages.fr.statuses.paid), '2 facture(s) mise(s) à jour : Payée.');
 });
