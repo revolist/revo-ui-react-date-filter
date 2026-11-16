@@ -40,4 +40,3 @@ Set `BASE_URL` to test another server or `CHROMIUM_PATH` to use an existing brow
 - [Calendar and date components](https://ui.rv-grid.com/components/calendar-and-dates/)
 - [Published UI package](https://www.npmjs.com/package/@revolist/ui/v/4.0.25)
 
-This educational example was prepared with AI assistance. No backend or credentials are required.
