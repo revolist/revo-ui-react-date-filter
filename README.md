@@ -32,6 +32,8 @@ npm run test:browser
 
 Set `BASE_URL` to test another server or `CHROMIUM_PATH` to use an existing browser executable. Unit tests cover invalid dates, leap years, UTC arithmetic, inclusive limits, fixture totals, and English/French formatting. The browser smoke suite checks presets, Apply, validation retention, Reset, empty results, calendar dismissal, mobile width, and page errors.
 
+The document selects `data-theme="light"` and `color-scheme: light` because the report uses a fixed light layout. Controls remain readable under both light and dark system preferences.
+
 `vite.config.ts` preserves the optional PDF imports in the React adapter during dependency prebundling and explicitly optimizes React dependencies. Keep it when copying the example.
 
 ## References

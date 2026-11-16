@@ -6,7 +6,17 @@ const errors = [];
 page.on('pageerror', error => errors.push(error.message));
 
 try {
+  await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto(process.env.BASE_URL || 'http://127.0.0.1:5174/', { waitUntil: 'networkidle' });
+  // The report has a light layout, so controls must stay light under either OS preference.
+  for (const colorScheme of ['dark', 'light']) {
+    await page.emulateMedia({ colorScheme });
+    await expect.poll(() => page.getByLabel('Start date', { exact: true }).evaluate(
+      input => getComputedStyle(input).getPropertyValue('--rv-ui-color-scheme').trim(),
+    )).toBe('light');
+    await expect(page.locator('html')).toHaveCSS('color-scheme', 'light');
+  }
+  await page.emulateMedia({ colorScheme: 'dark' });
   await expect(page.getByTestId('revenue')).toHaveText('$4,000.00');
   await expect(page.getByTestId('invoice-count')).toHaveText('4');
 
@@ -52,7 +62,7 @@ try {
   const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
   if (horizontalOverflow) throw new Error('Page overflows the mobile viewport horizontally.');
   if (errors.length) throw new Error(`Browser errors: ${errors.join('; ')}`);
-  console.log('PASS: initial fixture, draft/apply, validation retention, reset, empty range, calendar dismissal, mobile width, no page errors.');
+  console.log('PASS: initial fixture, draft/apply, validation retention, reset, empty range, calendar dismissal, mobile width, light controls under dark/light OS preferences, no page errors.');
 } finally {
   await browser.close();
 }
